@@ -7,11 +7,11 @@ indexing combining all of those seamlessly into some methods that allow for easy
 
 ## Main methods
 
-### `fromPattern`
+### `acquire::fromPattern`
 
 Matches a pattern in a given section into a typed pointer.
 
-- **Usage:**
+**Usage:**
 ```cpp
 #include <acquire/acquire.hpp>
 
@@ -26,11 +26,11 @@ if (!mySection)
 void* result = acquire::fromPattern<void*>(myPattern, mySection);
 ```
 
-### `fromExport`
+### `acquire::fromExport`
 
 Retrieves a typed pointer to the specified export name or ordinal from a Windows module.
 
-- **Usage:**
+**Usage:**
 ```cpp
 #include <acquire/acquire.hpp>
 
@@ -47,11 +47,11 @@ void* result = acquire::fromExport<void*>("LoadLibraryA", myModule);
 void* result = acquire::fromExport<void*>(42, myModule);
 ```
 
-### `fromVTable`
+### `acquire::fromVTable`
 
 Retrieves a typed pointer from the virtual function table (vtable) of an object at a specified index.
 
-- **Usage:**
+**Usage:**
 ```cpp
 #include <acquire/acquire.hpp>
 
@@ -61,13 +61,13 @@ void* result = acquire::fromVTable<void*>(&myObject, 2);
 
 ## Flexible Object Construction
 
-The library focuses on ease of use by providing constructors for objects that facilitate calling the functions in various ways. For example, `WinModule` can be constructed via:
-
-- `HMODULE`: `acquire::WinModule myModule(hModule);`
-- `const char*`: `acquire::WinModule myModule("MyModule.dll");`
-- `const wchar_t*`: `acquire::WinModule myModule(L"MyModule.dll");`
-- Default (current process executable, base module): `acquire::WinModule myModule;`
-
+The library focuses on ease of use by providing constructors for objects that facilitate calling the functions in various ways. For example, `WinModule` can be constructed as:
+```cpp
+acquire::WinModule myModule(hModule);
+acquire::WinModule myModule("MyModule.dll");
+acquire::WinModule myModule(L"MyModule.dll");
+acquire::WinModule myModule; // Base module / executable
+```
 This flexibility extends to other objects in the library, simplifying usage in different scenarios.
 
 ## More examples
