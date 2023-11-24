@@ -1,0 +1,29 @@
+name: CMake-CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+
+    - name: Configure CMake
+      run: cmake -S ${{github.workspace}} -B ${{runner.workspace}}\build -DCMAKE_BUILD_TYPE:STRING="Release" -DBUILD_TESTING:STRING="ON"
+
+    - name: Build
+      working-directory: ${{runner.workspace}}\build
+      run: cmake --build .
+
+    - name: Run tests
+      working-directory: ${{runner.workspace}}\build
+      run: ctest -V
