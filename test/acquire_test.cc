@@ -33,25 +33,10 @@ TEST(AcquireTest, FromPattern)
 
 TEST(AcquireTest, FromExport)
 {
-	// Get export via name from external module
-	{
-		void* exported{ acquire::fromExport("GetModuleHandleA", "kernel32.dll") };
-		EXPECT_EQ(exported, &GetModuleHandleA);
-	}
+	void* exported{ acquire::fromExport("GetModuleHandleA", "kernel32.dll") };
+	EXPECT_EQ(exported, &GetModuleHandleA);
 
-	// Get export via ordinal from external module
-	{
-		// I don't know how prone these are to change
-#ifdef _WIN64
-		uint16_t ordinalGetModuleHandleA{ 659 };
-#else
-		uint16_t ordinalGetModuleHandleA{ 655 };
-#endif
-
-		void* exported{ acquire::fromExport(ordinalGetModuleHandleA, "kernel32.dll") };
-		EXPECT_EQ(exported, &GetModuleHandleA);
-	}
-
+	// Dropped ordinal test as it is too volatile to reliably test
 }
 
 TEST(AcquireTest, FromVTable)
