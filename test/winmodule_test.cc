@@ -29,6 +29,14 @@ TEST(WinModuleTest, ModuleNameConstructor)
 
 }
 
+TEST(WinModuleTest, ModulePath)
+{
+	acquire::WinModule winModule("kernel32.dll");
+	ASSERT_TRUE(winModule);
+
+	EXPECT_STRCASEEQ(winModule.modulePath().filename().string().c_str(), "kernel32.dll");
+}
+
 TEST(WinModuleTest, BoolOperator)
 {
 	// Existing module name

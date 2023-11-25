@@ -1,6 +1,7 @@
 #pragma once
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
+#include <filesystem>
 
 namespace acquire
 {
@@ -47,6 +48,13 @@ namespace acquire
          * @return The underlying handle to the Windows module.
          */
         HMODULE getModule() const;
+
+        /**
+         * @brief Gets the qualified path of the associated module.
+         *
+         * @return The file name of the associated module or an empty path if no module is associated.
+         */
+        std::filesystem::path modulePath();
 
     public:
         /**

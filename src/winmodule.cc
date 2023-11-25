@@ -15,6 +15,19 @@ namespace acquire
 		return m_module;
 	}
 
+	std::filesystem::path WinModule::modulePath()
+	{
+		if (!m_module)
+			return std::filesystem::path();
+
+		wchar_t buffer[MAX_PATH];
+
+		if (!GetModuleFileNameW(m_module, buffer, MAX_PATH))
+			return std::filesystem::path();
+
+		return std::filesystem::path(buffer);
+	}
+
 	HMODULE WinModule::operator&() const
 	{
 		return m_module;
