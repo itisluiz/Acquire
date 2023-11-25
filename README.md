@@ -1,4 +1,6 @@
 # Acquire
+![my machine badge](https://forthebadge.com/images/badges/works-on-my-machine.svg)
+![workflow badge](https://github.com/itisluiz/Acquire/actions/workflows/cmake-ci.yml/badge.svg)
 
 The `acquire` library is a bite-sized library for dealing with the acquision of addresses 
 and functions in a more dynamic fashion, allowing for more verbose intentions and more implicit conversions.
